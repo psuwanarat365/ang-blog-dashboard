@@ -18,15 +18,40 @@ export class CategoriesComponent implements OnInit {
     let categoryData = {
       category: formData.value.category,
     };
+    let subCategoryData = {
+      subCategory: 'subCategory1',
+    };
     // console.log(categoryData);
 
     // เราส่ง data ไปในรูปแบบ collection เนื่องจาก firestore
     // รูปแบบ collection
+
+    //promise call - categories
     this.afs
       .collection('categories')
       .add(categoryData)
       .then((docRef) => {
         console.log(docRef);
+        //promise call - first level subcategories
+        this.afs
+          .collection('categories')
+          .doc(docRef.id)
+          .collection('subcategories')
+          .add(subCategoryData)
+          .then((docRef1) => {
+            console.log(docRef1);
+            //promise call - second level subcategories
+            this.afs
+              .collection('categories')
+              .doc(docRef.id)
+              .collection('subcategories')
+              .doc(docRef1.id)
+              .collection('subsubcategories')
+              .add(subCategoryData)
+              .then((docRef2) => {
+                console.log('Second Level Subcategory Saved Successfully');
+              });
+          });
       })
       .catch((err) => {
         console.log(err);
