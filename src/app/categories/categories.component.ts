@@ -18,6 +18,18 @@ export class CategoriesComponent implements OnInit {
     let categoryData = {
       category: formData.value.category,
     };
-    console.log(categoryData);
+    // console.log(categoryData);
+
+    // เราส่ง data ไปในรูปแบบ collection เนื่องจาก firestore
+    // รูปแบบ collection
+    this.afs
+      .collection('categories')
+      .add(categoryData)
+      .then((docRef) => {
+        console.log(docRef);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 }
