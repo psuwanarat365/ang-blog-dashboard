@@ -1,4 +1,5 @@
 /* app/dashboard/dashboard.component.css */
 .card {
   height: 200px;
+  cursor: pointer;
 }
