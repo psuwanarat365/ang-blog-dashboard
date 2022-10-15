@@ -1,0 +1,7 @@
+/* app/layouts/header/header.component.css */
+header {
+  height: 100px;
+}
+.site-logo {
+  font-size: 1.5em;
+}
